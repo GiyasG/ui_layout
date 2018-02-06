@@ -14,14 +14,15 @@
       this.height  = null;
       this.updateSizes(minWidth);
     }
-    
+
     ImageQuerySize.prototype.updateSizes = function(minWidth) {
       var w = this.queryWidth(this.element.innerWidth());
       var h = this.queryHeight(this.element.innerHeight());
+      if (minWidth && w < minWidth) { w = minWidth; }
       var newSize = (w != this.width) || (h != this.height);
       if (newSize) {
         this.width=w;
-        this.height=h;        
+        this.height=h;
       }
       return newSize;
     }
@@ -42,7 +43,7 @@
         params.height=this.height;
       }
       return Object.keys(params).length==0 ? "" : "?" + $httpParamSerializer(params);
-    }    
+    }
 
     //break width into supported size boundaries
     ImageQuerySize.prototype.queryWidth = function(width) {
@@ -68,7 +69,7 @@
         queryHeight = 533
       }
       return queryHeight;
-    }    
+    }
 
     /////
     return ImageQuerySize;
